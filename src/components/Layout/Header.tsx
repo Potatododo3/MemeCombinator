@@ -23,7 +23,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src="/logo.png"
+            src="https://i.imgur.com/3q5DX79.png"
             alt="MemeCombinator Logo"
             className="h-12 w-auto mr-2"
           />
