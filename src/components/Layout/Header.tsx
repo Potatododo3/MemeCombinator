@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <img 
             src="https://i.imgur.com/3q5DX79.png"
             alt="MemeCombinator Logo"
-            className="h-12 w-auto mr-2"
+            className="h-24 w-auto mr-2"
           />
           <h1 className="text-2xl font-display text-white glow-text">
             Meme<span className="text-meme-yellow">Combinator</span>
