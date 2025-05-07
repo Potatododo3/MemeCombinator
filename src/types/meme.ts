@@ -3,6 +3,7 @@ export interface Meme {
   name: string;
   image: string;
   description: string;
+  ticker?: string;
 }
 
 export interface MemeCombo {

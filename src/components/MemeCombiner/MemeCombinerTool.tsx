@@ -1,46 +1,55 @@
 import React, { useState } from 'react';
 import { Atom, Dices, ArrowRight } from 'lucide-react';
-import { popularMemes } from '../../data/memes';
 import { Meme } from '../../types/meme';
-import MemeSelection from './MemeSelection';
 import ResultDisplay from './ResultDisplay';
 
+// Define preset memes
+const pepeMeme: Meme = {
+  id: 'pepe',
+  name: 'Pepe the Frog',
+  image: '/pepe.jpg', // Path relative to the public folder
+  description: 'The iconic sad frog, a classic internet meme.',
+  ticker: 'PEPE',
+};
+
+const dogeMeme: Meme = {
+  id: 'doge',
+  name: 'Doge',
+  image: '/doge.jpg', // Path relative to the public folder
+  description: 'Much wow. Such Shiba Inu. Very crypto.',
+  ticker: 'DOGE',
+};
+
 const MemeCombinerTool: React.FC = () => {
-  const [selectedMeme1, setSelectedMeme1] = useState<Meme | null>(null);
-  const [selectedMeme2, setSelectedMeme2] = useState<Meme | null>(null);
   const [combinedMeme, setCombinedMeme] = useState<Meme | null>(null);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("");
 
   const handleCombine = () => {
-    if (!selectedMeme1 || !selectedMeme2) return;
-    
-    setIsAnimating(true);
     setIsLoading(true);
+    setLoadingMessage("Uploading images...");
     
-    // Simulate processing time
     setTimeout(() => {
-      const randomMeme = popularMemes[Math.floor(Math.random() * popularMemes.length)];
-      const newName = `${selectedMeme1.name.substring(0, 4)}${selectedMeme2.name.substring(selectedMeme2.name.length - 4)}`;
+      setLoadingMessage("Authenticating AI...");
+    }, 1500);
+
+    setTimeout(() => {
+      const newName = "PepeDoge";
       
       setCombinedMeme({
         id: `combined-${Date.now()}`,
         name: newName,
-        image: randomMeme.image, // For demo purposes, just use a random existing meme
-        description: `A powerful fusion of ${selectedMeme1.name} and ${selectedMeme2.name}`
+        image: '/pepedoge.png', // Preset combined image
+        description: `A legendary fusion of ${pepeMeme.name} and ${dogeMeme.name}`,
+        ticker: 'PEPEDOGE', // Added ticker for the combined meme
       });
       
       setIsLoading(false);
-    }, 2000);
-    
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 1500);
+      setLoadingMessage("");
+    }, 3000); // Total 3 seconds
   };
 
   const resetCombiner = () => {
-    setSelectedMeme1(null);
-    setSelectedMeme2(null);
     setCombinedMeme(null);
   };
 
@@ -53,23 +62,23 @@ const MemeCombinerTool: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 inline-flex items-center">
             <Atom size={32} className="mr-2 text-pink-400" />
-            Meme Combiner Lab
+            Meme Combiner Lab Demo
           </h2>
           <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Select two memes to combine and create a new hybrid meme that could become the next viral sensation!
+            Witness the fusion of two legendary memes! This is a demo showcasing the MemeCombiner capabilities.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {!combinedMeme ? (
             <>
-              <MemeSelection 
-                title="Base Meme"
-                memes={popularMemes}
-                selectedMeme={selectedMeme1}
-                setSelectedMeme={setSelectedMeme1}
-                className={isAnimating ? 'combine-anim' : ''}
-              />
+              {/* Display Pepe Meme */}
+              <div className="flex flex-col items-center p-4 bg-gray-800 rounded-lg shadow-lg text-center">
+                <img src={pepeMeme.image} alt={pepeMeme.name} className="w-full h-48 md:h-64 object-contain rounded-md mb-3" />
+                <h3 className="text-xl font-semibold text-white mb-1">{pepeMeme.name}</h3>
+                {pepeMeme.ticker && <p className="text-sm text-indigo-400 mb-1">Ticker: ${pepeMeme.ticker}</p>}
+                <p className="text-xs text-white/70 px-2">{pepeMeme.description}</p>
+              </div>
               
               <div className="flex flex-col items-center justify-center">
                 <button
@@ -77,12 +86,15 @@ const MemeCombinerTool: React.FC = () => {
                             hover:from-pink-600 hover:to-purple-700 text-white 
                             py-3 px-6 rounded-lg transition-all duration-300 
                             flex items-center justify-center
-                            ${selectedMeme1 && selectedMeme2 ? 'opacity-100 hover:scale-105' : 'opacity-50 cursor-not-allowed'}`}
+                            ${isLoading ? 'opacity-50 cursor-not-allowed' : 'opacity-100 hover:scale-105'}`}
                   onClick={handleCombine}
-                  disabled={!selectedMeme1 || !selectedMeme2 || isAnimating}
+                  disabled={isLoading}
                 >
                   {isLoading ? (
-                    <div className="animate-spin rounded-full h-6 w-6 border-4 border-white/20 border-t-white"></div>
+                    <div className="flex flex-col items-center">
+                      <div className="animate-spin rounded-full h-6 w-6 border-4 border-white/20 border-t-white mb-2"></div>
+                      <span>{loadingMessage}</span>
+                    </div>
                   ) : (
                     <>
                       <span className="mr-2">Combine</span>
@@ -90,20 +102,15 @@ const MemeCombinerTool: React.FC = () => {
                     </>
                   )}
                 </button>
-                
-                <div className="mt-4 flex items-center text-white/60">
-                  <ArrowRight size={16} />
-                  <span className="ml-2 text-sm">Random result each time</span>
-                </div>
               </div>
               
-              <MemeSelection 
-                title="Modifier Meme"
-                memes={popularMemes}
-                selectedMeme={selectedMeme2}
-                setSelectedMeme={setSelectedMeme2}
-                className={isAnimating ? 'combine-anim' : ''}
-              />
+              {/* Display Doge Meme */}
+              <div className="flex flex-col items-center p-4 bg-gray-800 rounded-lg shadow-lg text-center">
+                <img src={dogeMeme.image} alt={dogeMeme.name} className="w-full h-48 md:h-64 object-contain rounded-md mb-3" />
+                <h3 className="text-xl font-semibold text-white mb-1">{dogeMeme.name}</h3>
+                {dogeMeme.ticker && <p className="text-sm text-indigo-400 mb-1">Ticker: ${dogeMeme.ticker}</p>}
+                <p className="text-xs text-white/70 px-2">{dogeMeme.description}</p>
+              </div>
             </>
           ) : (
             <ResultDisplay 

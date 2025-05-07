@@ -9,6 +9,7 @@ interface ResultDisplayProps {
 
 const ResultDisplay: React.FC<ResultDisplayProps> = ({ combinedMeme, resetCombiner }) => {
   const [isMinting, setIsMinting] = useState(false);
+  const [shareStatus, setShareStatus] = useState<string>("Share");
   
   const handleMint = () => {
     setIsMinting(true);
@@ -16,6 +17,37 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ combinedMeme, resetCombin
       setIsMinting(false);
       alert('Minting successful! (This is a demo)');
     }, 2000);
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: combinedMeme.name,
+      text: combinedMeme.description,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        setShareStatus("Shared!");
+        setTimeout(() => setShareStatus("Share"), 2000);
+      } catch (error) {
+        console.error('Error sharing:', error);
+        setShareStatus("Failed");
+        setTimeout(() => setShareStatus("Share"), 2000);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${combinedMeme.name} - ${combinedMeme.description}. Check it out at ${window.location.href}`);
+        setShareStatus("Copied!");
+        setTimeout(() => setShareStatus("Share"), 2000);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        setShareStatus("Copy Failed");
+        alert("Sharing not supported. Failed to copy link to clipboard.");
+        setTimeout(() => setShareStatus("Share"), 2000);
+      }
+    }
   };
 
   return (
@@ -37,7 +69,8 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ combinedMeme, resetCombin
           </div>
         </div>
         
-        <h3 className="text-2xl font-bold text-white mb-2 glow-text">{combinedMeme.name}</h3>
+        <h3 className="text-2xl font-bold text-white mb-1 glow-text">{combinedMeme.name}</h3>
+        {combinedMeme.ticker && <p className="text-md text-indigo-300 mb-2 glow-text">Ticker: ${combinedMeme.ticker}</p>}
         <p className="text-white/80 mb-6">{combinedMeme.description}</p>
         
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
@@ -51,12 +84,15 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ combinedMeme, resetCombin
             ) : (
               <CreditCard size={18} className="mr-2" />
             )}
-            <span>{isMinting ? 'Minting...' : 'Mint as NFT'}</span>
+            <span>{isMinting ? 'Minting...' : 'Mint as Token'}</span>
           </button>
           
-          <button className="bg-purple-700 hover:bg-purple-800 text-white py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center">
+          <button 
+            className="bg-purple-700 hover:bg-purple-800 text-white py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center"
+            onClick={handleShare}
+          >
             <Share2 size={18} className="mr-2" />
-            <span>Share</span>
+            <span>{shareStatus}</span>
           </button>
         </div>
         
