@@ -27,10 +27,12 @@ const CommunitySection: React.FC = () => {
             </div>
             <p className="text-white/70 mb-4">Follow us for the latest meme trends, token updates, and community highlights.</p>
             <a 
-              href="#"
+              href="https://x.com/meme_combinator"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition-colors duration-300"
             >
-              Follow @MemeCombiner
+              Follow @meme_combinator
             </a>
             <div className="mt-4 bg-purple-800/50 rounded-lg p-3 opacity-70 group-hover:opacity-100 transition-opacity">
               <div className="flex items-start">
@@ -41,7 +43,7 @@ const CommunitySection: React.FC = () => {
                 />
                 <div>
                   <div className="flex items-center">
-                    <span className="text-white font-medium">@MemeCombiner</span>
+                    <span className="text-white font-medium">@meme_combinator</span>
                     <span className="text-white/50 text-xs ml-2">2h ago</span>
                   </div>
                   <p className="text-white/90 text-sm">Excited to announce our latest meme combination tool is now LIVE! Create, vote, share! 🚀</p>
