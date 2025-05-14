@@ -42,9 +42,9 @@ export const popularMemes: Meme[] = [
 export const featuredCombos: MemeCombo[] = [
   {
     id: 'combo1',
-    name: 'DogeStonks',
-    image: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg',
-    description: 'To the moon! Such profit!',
+    name: 'The Alliance',
+    image: 'https://i.imgur.com/ncIy7jW.png',
+    description: 'Doge and battle-hardened Pepe shake hands amid a burning crypto battlefield, symbolizing the resilience of OG memecoins through market chaos.',
     parent1: '1',
     parent2: '6',
     votes: 420,
@@ -53,9 +53,9 @@ export const featuredCombos: MemeCombo[] = [
   },
   {
     id: 'combo2',
-    name: 'Galaxy Pepe',
-    image: 'https://images.pexels.com/photos/7171398/pexels-photo-7171398.jpeg',
-    description: 'When your brain is so big it becomes amphibian',
+    name: 'Investor’s Journey',
+    image: 'https://i.imgur.com/cJSKRCD.png',
+    description: 'Wojaks emotions swing from despair to euphoria as Shiba Inu rockets from a crash to a moonshot, capturing the wild ride of memecoin investing.',
     parent1: '3',
     parent2: '4',
     votes: 69,
@@ -64,9 +64,9 @@ export const featuredCombos: MemeCombo[] = [
   },
   {
     id: 'combo3',
-    name: 'Distracted Wojak',
-    image: 'https://images.pexels.com/photos/7210235/pexels-photo-7210235.jpeg',
-    description: 'When you feel too much while looking at someone else',
+    name: 'Next Gen Chaos',
+    image: 'https://i.imgur.com/QdvT8mZ.png',
+    description: 'Floki and BabyDoge battle over a “Liquidity Pool” on a sinking DeFi platform, parodying the chaotic rivalry of new-gen memecoins chasing hype.',
     parent1: '2',
     parent2: '5',
     votes: 169,
