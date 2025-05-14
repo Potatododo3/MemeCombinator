@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Twitter } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           {['Combine', 'Gallery', 'Roadmap', 'Token', 'Community'].map((item) => (
             <a 
               key={item}
@@ -43,6 +43,14 @@ const Header: React.FC = () => {
               {item}
             </a>
           ))}
+          <a
+            href="https://x.com/meme_combinator"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-blue-400 transition-colors duration-300"
+          >
+            <Twitter size={24} />
+          </a>
           <button className="bg-gradient-to-r from-meme-yellow to-meme-green text-brand-dark font-bold px-4 py-2 rounded-md transition-all duration-300 hover:scale-105">
             Connect Wallet
           </button>
@@ -71,6 +79,16 @@ const Header: React.FC = () => {
                 {item}
               </a>
             ))}
+            <a
+              href="https://x.com/meme_combinator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-blue-400 transition-colors duration-300 flex items-center py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Twitter size={20} className="mr-2" />
+              Follow us on X
+            </a>
             <button className="bg-gradient-to-r from-meme-yellow to-meme-green text-brand-dark font-bold px-4 py-2 rounded-md transition-all duration-300 w-full">
               Connect Wallet
             </button>
