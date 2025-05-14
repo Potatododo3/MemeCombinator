@@ -34,7 +34,7 @@ const Header: React.FC = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {['Combine', 'Gallery', 'Roadmap', 'Token', 'Community'].map((item) => (
+          {['Combine', 'Gallery', 'Token', 'Community'].map((item) => (
             <a 
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -51,9 +51,6 @@ const Header: React.FC = () => {
           >
             <Twitter size={24} />
           </a>
-          <button className="bg-gradient-to-r from-meme-yellow to-meme-green text-brand-dark font-bold px-4 py-2 rounded-md transition-all duration-300 hover:scale-105">
-            Connect Wallet
-          </button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -69,7 +66,7 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-brand-dark/95 backdrop-blur-md">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {['Combine', 'Gallery', 'Roadmap', 'Token', 'Community'].map((item) => (
+            {['Combine', 'Gallery', 'Token', 'Community'].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -89,9 +86,6 @@ const Header: React.FC = () => {
               <Twitter size={20} className="mr-2" />
               Follow us on X
             </a>
-            <button className="bg-gradient-to-r from-meme-yellow to-meme-green text-brand-dark font-bold px-4 py-2 rounded-md transition-all duration-300 w-full">
-              Connect Wallet
-            </button>
           </div>
         </div>
       )}
