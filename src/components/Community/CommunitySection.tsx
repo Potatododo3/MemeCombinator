@@ -34,7 +34,7 @@ const CommunitySection: React.FC = () => {
             >
               Follow @meme_combinator
             </a>
-            <div className="mt-4 bg-purple-800/50 rounded-lg p-3 opacity-70 group-hover:opacity-100 transition-opacity">
+            <div className="mt-4 bg-purple-800/50 rounded-lg p-3">
               <div className="flex items-start">
                 <img 
                   src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" 
